@@ -1,0 +1,36 @@
+{
+    "data" : {
+        "weather" : [
+                     {
+                     "precipMM" : "0.0",
+                     "tempMaxC" : "34",
+                     "winddir16Point" : "SSE",
+                     "winddirDegree" : "150",
+                     "winddirection" : "SSE",
+                     "windspeedKmph" : "35",
+                     "tempMinC" : "22",
+                     "weatherCode" : "113",
+                     "weatherIconUrl" : [
+                                         {
+                                         "value" : "http:\/\/cdn.worldweatheronline.net\/images\/wsymbols01_png_64\/wsymbol_0001_sunny.png"
+                                         }
+                                         ],
+                     "windspeedMiles" : "21",
+                     "tempMaxF" : "94",
+                     "tempMinF" : "71",
+                     "date" : "2015-10-03",
+                     "weatherDesc" : [
+                                      {
+                                      "value" : "Sunny"
+                                      }
+                                      ]
+                     }
+                     ],
+        "request" : [
+                     {
+                     "query" : "Port Moresby, Papua New Guinea",
+                     "type" : "City"
+                     }
+                     ]
+    }
+}
