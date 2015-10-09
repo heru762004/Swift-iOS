@@ -30,7 +30,7 @@ public class WeatherRequestResponse: NSObject {
     // callback protocol object
     var delegate:WeatherRequestResponseCallback?
     // class to handle the response data parser
-    var dataParser:DataParser
+    public var dataParser:DataParser
     
     // initialization
     override public init() {
@@ -57,12 +57,17 @@ public class WeatherRequestResponse: NSObject {
             } else {
                 // parse response data using data parser class
                 let respData:ResponseData = self.dataParser.parse(data!)
-                if(respData.status_code == 0) {
+                if(respData.status == StatusCode.SUCCESS) {
                     // if no error during parsing, call onRequestFinished
                     self.delegate?.onRequestFinished(respData.weather)
                 } else {
                     // if there is an error, throw callback using onRequestError
-                    self.delegate?.onRequestError(respData.status_message)
+                    // if there is an error from server, return status message error
+                    if respData.status == StatusCode.E101 {
+                        self.delegate?.onRequestError(respData.status_message)
+                    } else {
+                        self.delegate?.onRequestError(respData.status.rawValue)
+                    }
                 }
             }
             

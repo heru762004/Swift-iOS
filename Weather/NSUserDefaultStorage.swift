@@ -10,7 +10,7 @@
 
 import Foundation
 
-public class NSUserDefaultStorage: MasterDataStorage {
+public class NSUserDefaultStorage: NSObject {
     // NSUserDefault
     var storage:NSUserDefaults;
     
@@ -33,6 +33,19 @@ public class NSUserDefaultStorage: MasterDataStorage {
             return data
         } else {
             return []
+        }
+    }
+    
+    public func getBundleData(keyword: String) -> String {
+        let check = storage.objectForKey(keyword)
+        if check != nil {
+            if (check as! String).characters.count > 0 {
+                return check as! String
+            } else {
+                return "10"
+            }
+        } else {
+            return "10"
         }
     }
     

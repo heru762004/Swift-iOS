@@ -14,11 +14,15 @@ public class CityNameStorageHandler: NSObject {
     // object to handle persistent storage
     var dataStorage: NSUserDefaultStorage
     // keyword that used in persistent storage as identified key
-    var keyword:String = "CityName";
+    var keyword:String = "CityName"
+    var keywordCityPreference = "num_city_preference"
+    var maxCityNameData:Int
     
     // initialization
     override public init() {
         self.dataStorage = NSUserDefaultStorage()
+        self.maxCityNameData = 10
+        self.maxCityNameData = Int(self.dataStorage.getBundleData(self.keywordCityPreference))!
     }
     
     // check whether city name available
@@ -39,8 +43,8 @@ public class CityNameStorageHandler: NSObject {
     public func addCityName(cityName: String) {
         // store the city name only if there is weather data
         var arrayData:[String] = getAllCitiesName()
-        // maximum data store is 10, otherwise we should remove the old data
-        if arrayData.count >= 10 {
+        // maximum data store is maxCity, otherwise we should remove the old data
+        while arrayData.count >= maxCityNameData {
             arrayData.removeFirst()
         }
         // filter whether there is a duplicate city name that already store in storage

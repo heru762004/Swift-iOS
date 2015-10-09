@@ -77,8 +77,7 @@ class DataParserTest: XCTestCase {
         // This is an example of a functional test case.
         // This function to test normal json data input output
         let result:ResponseData = self.dataParser.parse(testDataNormal)
-        XCTAssertEqual(result.status_code, 0)
-        XCTAssertEqual(result.status_message, "Success")
+        XCTAssertEqual(result.status, StatusCode.SUCCESS)
         XCTAssertNotEqual(result.weather, nil)
         XCTAssertEqual(result.weather.weatherIconUrl, "http://cdn.worldweatheronline.net/images/wsymbols01_png_64/wsymbol_0006_mist.png")
         XCTAssertEqual(result.weather.cityName, "Port Moresby, Papua New Guinea")
@@ -91,8 +90,7 @@ class DataParserTest: XCTestCase {
     func testDataError() {
         // This function to test negative test case : unable to find weather location
         let result:ResponseData = self.dataParser.parse(self.testDataErrorNoLocation)
-        XCTAssertEqual(result.status_code, 101)
-        XCTAssertEqual(result.status_message, "Unable to find any matching weather location to the query submitted!")
+        XCTAssertEqual(result.status, StatusCode.E101)
         XCTAssertNotEqual(result.weather, nil)
         
         XCTAssertEqual(result.weather.weatherIconUrl, "")
@@ -106,59 +104,51 @@ class DataParserTest: XCTestCase {
     func testMissingCurrentCondition() {
         // function to test missing current condition
         let result:ResponseData = self.dataParser.parse(self.testDataMissingCurrentCondition)
-        XCTAssertEqual(result.status_code, 102)
-        XCTAssertEqual(result.status_message, "Invalid JSON response")
+        XCTAssertEqual(result.status, StatusCode.E102)
     }
     
     func testMissingCity() {
         // This function to test negative test case : unable to find weather location
         let result:ResponseData = self.dataParser.parse(self.testDataMissingCity)
-        XCTAssertEqual(result.status_code, 104)
-        XCTAssertEqual(result.status_message, "Cannot get city name")
+        XCTAssertEqual(result.status, StatusCode.E104)
         XCTAssertNotEqual(result.weather, nil)
     }
     
     func testMissingHumidity() {
         // function to test missing current condition
         let result:ResponseData = self.dataParser.parse(self.testDataMissingHumidity)
-        XCTAssertEqual(result.status_code, 106)
-        XCTAssertEqual(result.status_message, "Cannot get humidity")
+        XCTAssertEqual(result.status, StatusCode.E106)
     }
     
     func testMissingTemperature() {
         // function to test missing current condition
         let result:ResponseData = self.dataParser.parse(self.testDataMissingTemperature)
-        XCTAssertEqual(result.status_code, 107)
-        XCTAssertEqual(result.status_message, "Cannot get temperature")
+        XCTAssertEqual(result.status, StatusCode.E107)
     }
     
     func testMissingObsTime() {
         // function to test missing current condition
         let result:ResponseData = self.dataParser.parse(self.testDataMissingObsTime)
-        XCTAssertEqual(result.status_code, 108)
-        XCTAssertEqual(result.status_message, "Cannot get observation time")
+        XCTAssertEqual(result.status, StatusCode.E108)
     }
     
     func testDataEmptyJSON() {
         // function to test empty json
         let data:NSData! = ("{}" as NSString).dataUsingEncoding(NSUTF8StringEncoding)
         let result:ResponseData = self.dataParser.parse(data)
-        XCTAssertEqual(result.status_code, 102)
-        XCTAssertEqual(result.status_message, "Invalid JSON response")
+        XCTAssertEqual(result.status, StatusCode.E102)
     }
     
     func testDataEmpty() {
         let data:NSData! = ("" as NSString).dataUsingEncoding(NSUTF8StringEncoding)
         let result:ResponseData = self.dataParser.parse(data)
-        XCTAssertEqual(result.status_code, 102)
-        XCTAssertEqual(result.status_message, "Invalid JSON response")
+        XCTAssertEqual(result.status, StatusCode.E102)
     }
     
     func testDataPlainText() {
         let data:NSData! = ("Error 404" as NSString).dataUsingEncoding(NSUTF8StringEncoding)
         let result:ResponseData = self.dataParser.parse(data)
-        XCTAssertEqual(result.status_code, 102)
-        XCTAssertEqual(result.status_message, "Invalid JSON response")
+        XCTAssertEqual(result.status, StatusCode.E102)
     }
     
 

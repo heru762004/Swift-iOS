@@ -8,19 +8,30 @@
 
 import Foundation
 
+public enum StatusCode: String {
+    case SUCCESS = "Success"
+    case E101 = "Error from server"
+    case E102 = "Invalid JSON response"
+    case E103 = "Cannot get weather description"
+    case E104 = "Cannot get city name"
+    case E105 = "Cannot get weather icon data"
+    case E106 = "Cannot get humidity"
+    case E107 = "Cannot get temperature"
+    case E108 = "Cannot get observation time"
+}
+
 public class ResponseData: NSObject {
-    // response data status code
-    // 0 means there is no error
-    public var status_code:Int
-    // status message to describe the status code
+    // response data status
+    public var status:StatusCode
+    // response status message from server
     public var status_message:String
     // weather object
     public var weather: Weather
     
     // initialization
     override init() {
-        self.status_code = 0
-        self.status_message = "Success"
+        status = StatusCode.SUCCESS
+        status_message = StatusCode.SUCCESS.rawValue
         self.weather = Weather()
         super.init()
     }
