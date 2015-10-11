@@ -42,9 +42,11 @@ class WeatherUITests: XCTestCase {
         app.textFields["Enter City Name"].typeText("Singapore")
         app.typeText("\n")
         app.buttons["Search"].tap()
-        let table = app.tables.elementBoundByIndex(0)
-        XCTAssertEqual(table.cells.count, 5)
         app.navigationBars["Singapore, Singapore"].childrenMatchingType(.Button).matchingIdentifier("Back").elementBoundByIndex(0).tap()
+        app.textFields["Enter City Name"].tap()
+        let table2 = app.tables.elementBoundByIndex(0)
+        XCTAssertEqual(table2.exists, true)
+        XCTAssertEqual(table2.staticTexts["Singapore"].exists, true)
     }
     
     // test select city from table
@@ -53,10 +55,11 @@ class WeatherUITests: XCTestCase {
         let app = XCUIApplication()
         app.textFields["Enter City Name"].tap()
         app.tables.staticTexts["Singapore"].tap()
-        let table = app.tables.elementBoundByIndex(0)
-        XCTAssertEqual(table.cells.count, 5)
         app.navigationBars["Singapore, Singapore"].childrenMatchingType(.Button).matchingIdentifier("Back").elementBoundByIndex(0).tap()
+        app.textFields["Enter City Name"].tap()
+        let table2 = app.tables.elementBoundByIndex(0)
+        XCTAssertEqual(table2.exists, true)
+        XCTAssertEqual(table2.staticTexts["Singapore"].exists, true)
     }
-    
     
 }
