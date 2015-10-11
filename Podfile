@@ -7,6 +7,7 @@ target 'Weather' do
 
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 pod 'Alamofire', '~> 2.0'
+pod 'OHHTTPStubs'
 
 end
 

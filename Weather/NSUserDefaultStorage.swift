@@ -36,7 +36,7 @@ public class NSUserDefaultStorage: NSObject {
         }
     }
     
-    public func getBundleData(keyword: String) -> String {
+    public func getBundleData(keyword: String) -> Int {
         let check = storage.objectForKey(keyword)
         if check != nil {
             if (check as! String).characters.count > 0 {
