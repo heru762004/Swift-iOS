@@ -44,6 +44,10 @@ class ViewController: UIViewController, WeatherRequestResponseCallback, UITableV
         self.view.addSubview(self.autoCompleteTableView);
         
         loadingIndicator.hidden = true
+        
+        // register notification center to perform refresh when application active from background
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "viewDidActive", name:UIApplicationDidBecomeActiveNotification, object: nil)
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -53,6 +57,11 @@ class ViewController: UIViewController, WeatherRequestResponseCallback, UITableV
         // Dispose of any resources that can be recreated.
     }
 
+    func viewDidActive() {
+        self.storageData.refreshDataFromStorage()
+        self.cityName = self.storageData.getAllCitiesName()
+        self.autoCompleteTableView.reloadData()
+    }
     
     // before change screen, pass weather object to next screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

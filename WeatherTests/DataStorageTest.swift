@@ -17,6 +17,8 @@ class DataStorageTest: XCTestCase {
         self.cityNameStorage = CityNameStorageHandler()
         // remove all the data first
         self.cityNameStorage.removeAllCityNames()
+        // reset max num of city to default (10)
+        self.cityNameStorage.resetMaxNumOfCityToDefault()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -59,6 +61,35 @@ class DataStorageTest: XCTestCase {
         XCTAssertEqual(self.cityNameStorage.cityNameDataCount(), 0)
         XCTAssertEqual(self.cityNameStorage.getAllCitiesName(), [])
     }
+    
+    // test set maximum number of city to 5
+    func testSetMaximumNumberOfCityStorage() {
+        self.cityNameStorage.setMaxNumOfCity("5")
+        self.cityNameStorage.addCityName("Singapore")
+        self.cityNameStorage.addCityName("Bali")
+        self.cityNameStorage.addCityName("Jakarta")
+        self.cityNameStorage.addCityName("Batam")
+        self.cityNameStorage.addCityName("Ho Chi Minh")
+        self.cityNameStorage.addCityName("Tokyo")
+        XCTAssertEqual(self.cityNameStorage.cityNameDataCount(), 5)
+        XCTAssertEqual(self.cityNameStorage.getAllCitiesName(), ["Bali", "Jakarta", "Batam", "Ho Chi Minh", "Tokyo"])
+    }
+    
+    // test set maximum number of city to empty
+    func testSetMaximumNumberOfCityEmpty() {
+        self.cityNameStorage.setMaxNumOfCity("")
+        self.cityNameStorage.addCityName("Singapore")
+        self.cityNameStorage.addCityName("Bali")
+        self.cityNameStorage.addCityName("Jakarta")
+        self.cityNameStorage.addCityName("Batam")
+        self.cityNameStorage.addCityName("Ho Chi Minh")
+        self.cityNameStorage.addCityName("Tokyo")
+        XCTAssertEqual(self.cityNameStorage.cityNameDataCount(), 6)
+        XCTAssertEqual(self.cityNameStorage.getAllCitiesName(), ["Singapore", "Bali", "Jakarta", "Batam", "Ho Chi Minh", "Tokyo"])
+
+    }
+    
+    
 
     func testPerformanceExample() {
         // This is an example of a performance test case.

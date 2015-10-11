@@ -11,10 +11,10 @@
 import Foundation
 import SwiftyJSON
 
-public class JSONDataParser: DataParser {
+public class JSONDataParser: NSObject {
     
     // function to parse the data
-    override public func parse(input: NSData) -> ResponseData {
+    public func parse(input: NSData) -> ResponseData {
         let resp:ResponseData = ResponseData()
         let json = JSON(data: input)
         print(json)

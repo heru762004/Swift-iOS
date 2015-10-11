@@ -18,7 +18,7 @@ class DataParserTest: XCTestCase {
     var testDataMissingHumidity:NSData!
     var testDataMissingTemperature:NSData!
     var testDataMissingObsTime:NSData!
-    var dataParser:DataParser!
+    var dataParser:JSONDataParser!
     
     override func setUp() {
         super.setUp()

@@ -40,13 +40,19 @@ public class NSUserDefaultStorage: NSObject {
         let check = storage.objectForKey(keyword)
         if check != nil {
             if (check as! String).characters.count > 0 {
-                return check as! String
+                let x:Int = Int(check as! String)!
+                return x
             } else {
-                return "10"
+                return 10
             }
         } else {
-            return "10"
+            return 10
         }
+    }
+    
+    public func storeBundleData(keyword:String, num:String) {
+        storage.setObject(num, forKey:keyword)
+        storage.synchronize()
     }
     
     public func removeAllData(keyword: String) {

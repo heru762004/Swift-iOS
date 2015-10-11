@@ -22,7 +22,7 @@ public class CityNameStorageHandler: NSObject {
     override public init() {
         self.dataStorage = NSUserDefaultStorage()
         self.maxCityNameData = 10
-        self.maxCityNameData = Int(self.dataStorage.getBundleData(self.keywordCityPreference))!
+        self.maxCityNameData = self.dataStorage.getBundleData(self.keywordCityPreference)
     }
     
     // check whether city name available
@@ -39,10 +39,24 @@ public class CityNameStorageHandler: NSObject {
         return self.dataStorage.getData(keyword).count
     }
     
+    // reload data from storage
+    public func refreshDataFromStorage() {
+        self.maxCityNameData = self.dataStorage.getBundleData(self.keywordCityPreference)
+        var arrayData:[String] = getAllCitiesName()
+        while arrayData.count > maxCityNameData {
+            arrayData.removeFirst()
+        }
+        self.dataStorage.storeData(keyword, arrayData: arrayData)
+    }
+    
     // add and store city name to persistent storage
     public func addCityName(cityName: String) {
         // store the city name only if there is weather data
         var arrayData:[String] = getAllCitiesName()
+        
+        // update max number of city
+        self.maxCityNameData = self.dataStorage.getBundleData(self.keywordCityPreference)
+        
         // maximum data store is maxCity, otherwise we should remove the old data
         while arrayData.count >= maxCityNameData {
             arrayData.removeFirst()
@@ -67,5 +81,13 @@ public class CityNameStorageHandler: NSObject {
     
     public func removeAllCityNames() {
         self.dataStorage.removeAllData(keyword)
+    }
+    
+    public func setMaxNumOfCity(num:String) {
+        self.dataStorage.storeBundleData(self.keywordCityPreference, num: num)
+    }
+    
+    public func resetMaxNumOfCityToDefault() {
+        self.dataStorage.storeBundleData(self.keywordCityPreference, num: "10")
     }
 }

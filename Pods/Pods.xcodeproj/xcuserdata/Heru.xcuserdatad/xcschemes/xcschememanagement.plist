@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>OHHTTPStubs.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Weather.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -28,21 +33,6 @@
 			<true/>
 		</dict>
 		<key>5E535CD1DE9DB117B8F80C66A9C42903</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>987FA97C16D950B8DE9F156846534199</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A9938152BFA4AF7690082E65CB1848A8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
 		<dict>
 			<key>primary</key>
 			<true/>

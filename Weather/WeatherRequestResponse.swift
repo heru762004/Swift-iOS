@@ -28,9 +28,9 @@ public class WeatherRequestResponse: NSObject {
     // object to store the response from server
     var data:NSMutableData!
     // callback protocol object
-    var delegate:WeatherRequestResponseCallback?
+    public var delegate:WeatherRequestResponseCallback?
     // class to handle the response data parser
-    public var dataParser:DataParser
+    public var dataParser:JSONDataParser
     
     // initialization
     override public init() {

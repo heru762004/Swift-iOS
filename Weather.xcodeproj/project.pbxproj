@@ -31,7 +31,7 @@
 		C9F95B4B1BC0D08F0003C73D /* missing_humidity_json.json in Resources */ = {isa = PBXBuildFile; fileRef = C9F95B4A1BC0D08F0003C73D /* missing_humidity_json.json */; };
 		C9F95B4F1BC0D2740003C73D /* missing_temperature_json.json in Resources */ = {isa = PBXBuildFile; fileRef = C9F95B4E1BC0D2740003C73D /* missing_temperature_json.json */; };
 		C9F95B511BC0D32D0003C73D /* missing_obs_time_json.json in Resources */ = {isa = PBXBuildFile; fileRef = C9F95B501BC0D32D0003C73D /* missing_obs_time_json.json */; };
-		F36C67D6EBF389AABE171571 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6C650FD5A3727FC79173912 /* Pods_Weather.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F36C67D6EBF389AABE171571 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6C650FD5A3727FC79173912 /* Pods_Weather.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
