@@ -83,6 +83,47 @@ class WeatherRequestResponseTest: XCTestCase, WeatherRequestResponseCallback {
         })
     }
     
+    func testHttpTimeout() {
+        OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+            return request.URL!.absoluteString == "http://api.worldweatheronline.com/free/v1/weather.ashx?key=vzkjnx2j5f88vyn5dhvvqkzc&q=ABCDEF&fx=yes&format=json"
+            }, withStubResponse: {
+                (request: NSURLRequest) -> OHHTTPStubsResponse in
+                let notConnectedError = NSError(domain:NSURLErrorDomain, code:Int(CFNetworkErrors.CFURLErrorNotConnectedToInternet.rawValue), userInfo:nil)
+                return OHHTTPStubsResponse(error:notConnectedError)
+        })
+        
+        self.expectation = self.expectationWithDescription("WeatherReqRespWait")
+        self.weatherReqResp?.load_data("ABCDEF")
+        self.waitForExpectationsWithTimeout(500, handler: {error in
+            if error == nil {
+                XCTAssertNotNil(self.errorMessage)
+                XCTAssertEqual(self.errorMessage, StatusCode.E109.rawValue)
+            }
+        })
+    }
+    
+    // function test invalid JSON Response
+    func testInvalidJSONResponse() {
+        OHHTTPStubs.stubRequestsPassingTest({
+            (request: NSURLRequest) -> Bool in
+            return request.URL!.absoluteString == "http://api.worldweatheronline.com/free/v1/weather.ashx?key=vzkjnx2j5f88vyn5dhvvqkzc&q=Singapore&fx=yes&format=json"
+            }, withStubResponse: {
+                (request: NSURLRequest) -> OHHTTPStubsResponse in
+                //return OHHTTPStubsResponse(JSONObject: obj, statusCode:200, headers:nil)
+                return OHHTTPStubsResponse(fileAtPath: OHPathForFile("missing_city_json.json", self.dynamicType)!, statusCode: 200, headers: ["Content-Type":"application/json"])
+        })
+        // define expectation to wait
+        self.expectation = self.expectationWithDescription("WeatherReqRespWait")
+        self.weatherReqResp?.load_data("Singapore")
+        self.waitForExpectationsWithTimeout(500, handler: {error in
+            if error == nil {
+                XCTAssertNotNil(self.errorMessage)
+                XCTAssertEqual(self.errorMessage, StatusCode.E104.rawValue)
+            }
+        })
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock {

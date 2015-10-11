@@ -18,6 +18,7 @@ public enum StatusCode: String {
     case E106 = "Cannot get humidity"
     case E107 = "Cannot get temperature"
     case E108 = "Cannot get observation time"
+    case E109 = "Cannot establish connection to server"
 }
 
 public class ResponseData: NSObject {

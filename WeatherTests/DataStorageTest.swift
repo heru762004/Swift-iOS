@@ -89,7 +89,48 @@ class DataStorageTest: XCTestCase {
 
     }
     
+    // set number of city less than previous one
+    func testSetMaximumNumberOfCityLessThanExisting() {
+        self.cityNameStorage.addCityName("Singapore")
+        self.cityNameStorage.addCityName("Bali")
+        self.cityNameStorage.addCityName("Jakarta")
+        self.cityNameStorage.addCityName("Batam")
+        self.cityNameStorage.addCityName("Ho Chi Minh")
+        self.cityNameStorage.addCityName("Tokyo")
+        self.cityNameStorage.addCityName("Kuala Lumpur")
+        self.cityNameStorage.addCityName("Sarawak")
+        self.cityNameStorage.addCityName("Kuching")
+        self.cityNameStorage.addCityName("Penang")
+        self.cityNameStorage.addCityName("California")
+        
+        self.cityNameStorage.setMaxNumOfCity("5")
+        self.cityNameStorage.refreshDataFromStorage()
+        
+        XCTAssertEqual(self.cityNameStorage.cityNameDataCount(), 5)
+        XCTAssertEqual(self.cityNameStorage.getAllCitiesName(), ["Kuala Lumpur", "Sarawak", "Kuching", "Penang", "California"])
+        
+    }
     
+    // set number of city into null
+    func testRemoveMaxNumberOfCity() {
+        self.cityNameStorage.addCityName("Singapore")
+        self.cityNameStorage.addCityName("Bali")
+        self.cityNameStorage.addCityName("Jakarta")
+        self.cityNameStorage.addCityName("Batam")
+        self.cityNameStorage.addCityName("Ho Chi Minh")
+        self.cityNameStorage.addCityName("Tokyo")
+        self.cityNameStorage.addCityName("Kuala Lumpur")
+        self.cityNameStorage.addCityName("Sarawak")
+        self.cityNameStorage.addCityName("Kuching")
+        self.cityNameStorage.addCityName("Penang")
+        self.cityNameStorage.addCityName("California")
+        
+        XCTAssertEqual(self.cityNameStorage.cityNameDataCount(), 10)
+        self.cityNameStorage.removeMaxNumCityData()
+        self.cityNameStorage.refreshDataFromStorage()
+        
+        XCTAssertEqual(self.cityNameStorage.cityNameDataCount(), 10)
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.

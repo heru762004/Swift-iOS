@@ -90,4 +90,8 @@ public class CityNameStorageHandler: NSObject {
     public func resetMaxNumOfCityToDefault() {
         self.dataStorage.storeBundleData(self.keywordCityPreference, num: "10")
     }
+    
+    public func removeMaxNumCityData() {
+        self.dataStorage.removeAllData(self.keywordCityPreference)
+    }
 }

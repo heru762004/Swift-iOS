@@ -51,8 +51,8 @@ public class WeatherRequestResponse: NSObject {
             print("Response : \(response)")
             if error != nil {
                 // if there is an error, throw callback using onRequestError
-                print(error)
-                self.delegate?.onRequestError(error.debugDescription)
+                let status:StatusCode = StatusCode.E109
+                self.delegate?.onRequestError(status.rawValue)
                 return
             } else {
                 // parse response data using data parser class

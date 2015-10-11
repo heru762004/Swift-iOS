@@ -62,4 +62,34 @@ class WeatherUITests: XCTestCase {
         XCTAssertEqual(table2.staticTexts["Singapore"].exists, true)
     }
     
+    // test fill invalid city found
+    func testFillInvalidCity() {
+        let app = XCUIApplication()
+        let enterCityNameTextField = app.textFields["Enter City Name"]
+        enterCityNameTextField.tap()
+        enterCityNameTextField.typeText("ABCDEF")
+        app.typeText("\r")
+        app.buttons["Search"].tap()
+        app.alerts["Error"].collectionViews.buttons["OK"].tap()
+    }
+
+    // test fill empty city name
+    func testEmptyCity() {
+        let app = XCUIApplication()
+        app.buttons["Search"].tap()
+        app.alerts["Error"].collectionViews.buttons["OK"].tap()
+    }
+    
+    // test refresh table detail weather
+    func testRefreshTableView() {
+        
+        let app = XCUIApplication()
+        app.textFields["Enter City Name"].tap()
+        app.textFields["Enter City Name"].typeText("Singapore")
+        app.typeText("\r")
+        app.buttons["Search"].tap()
+        app.tables.staticTexts["Temperature : 32 C"].swipeDown()
+        app.navigationBars["Singapore, Singapore"].childrenMatchingType(.Button).matchingIdentifier("Back").elementBoundByIndex(0).tap()
+        
+    }
 }
